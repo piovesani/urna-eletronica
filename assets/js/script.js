@@ -7,12 +7,16 @@ let datailsRight = document.querySelector('.details-1-right');
 
 let currentStage = 0;
 let number = '';
+let white = true;
 
+const steps = getSteps();
 
 const startStep = () => {
 
     let step = steps[currentStage];
     let numberHtml = '';
+    number = '';
+    white = false;
 
     for (let i = 0; i < step.numbers; i++) {
         if (i === 0) {
@@ -42,8 +46,6 @@ const updateInterface = () => {
         }
     });
 
-    console.log(candidate)
-
     if (candidate.length > 0) {
         description.style.display = 'block';
         datailsFooter.style.display = 'block';
@@ -51,24 +53,26 @@ const updateInterface = () => {
                                    Partido: ${candidate[0].entourage}<br/>`;
 
         let photosHtml = '';
-        for(let i in candidate[0].photos){
+        for (let i in candidate[0].photos) {
             photosHtml +=
-            `<div class="details-img">
+                `<div class="details-img">
                 <img src="assets/images/${candidate[0].photos[i].url}" alt=""/>
-                ${ candidate[0].photos[i].legend }</div>`;
+                ${candidate[0].photos[i].legend}</div>`;
         }
 
         datailsRight.innerHTML = photosHtml;
-
-
-              
-
+    }
+    else {
+        description.style.display = 'block';
+        datailsFooter.style.display = 'block';
+        infoCandidate.innerHTML = '';
+        numberHtml = ''
+        infoCandidate.innerHTML = '<div class="warning blink">VOTO NULO </div>';
     }
 }
 
 const handleNumberClick = (n) => {
     let elementNumber = document.querySelector('.square.blink');
-    console.log(elementNumber)
     if (elementNumber !== null) {
         elementNumber.innerHTML = n;
 
@@ -86,16 +90,44 @@ const handleNumberClick = (n) => {
 }
 
 const handleWhiteButtonClick = () => {
-    alert(`Você clicou em BRANCO`)
+    number = '';
+    white = true;
+    inputs.innerHTML = ''
+    description.style.display = 'block';
+    datailsFooter.style.display = 'block';
+    datailsRight.innerHTML = '';
+    infoCandidate.innerHTML = '<div class="warning blink">VOTO EM BRANCO</div>';
+
+
 }
 
 const handleYellowButtonClick = () => {
-    alert(`Você clicou em CORRIGE`)
+    startStep();
 }
 
 const handleGreenButtonClick = () => {
-    alert(`Você clicou em CONFIRMA`)
-}
 
+    let step = steps[currentStage];
+
+    let check = false;
+
+    if(white === true){
+        console.log('Confirmando como voto BRANCO !');
+        check = true;
+    }
+    else if(number.length === step.numbers){
+        console.log(`Confirmando como ${number}`);
+        check = true;
+    }
+    if(check){
+        currentStage++;
+        if(steps[currentStage] !== undefined){
+            startStep();
+        }
+        else{
+            console.log("FIM")
+        }
+    }
+}
 
 startStep();

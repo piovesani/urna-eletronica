@@ -88,6 +88,12 @@ body {
     align-items: center;
 }
 
+.warning{
+    margin-left: 20%;
+    font-size: 30px;
+    font-weight: 700;
+}
+
 .title-candidate {
     height: 50px;
     display: flex;
