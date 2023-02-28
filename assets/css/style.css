@@ -37,7 +37,7 @@ body {
     align-items: center;
     height: 100vh;
     background-image: url('../images/bg.png');
-    background-position: top;
+    background-position: center;
     background-size: cover;
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -92,6 +92,15 @@ body {
     margin-left: 20%;
     font-size: 30px;
     font-weight: 700;
+}
+
+.big{
+    font-size: 70px;
+    font-weight: 700;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .title-candidate {
@@ -211,4 +220,80 @@ body {
     background-color: var(--bg-green);
     color: var(--text-dark);
     font-size: 14px;
+}
+
+@media (max-width: 1200px){
+    .container{
+        width: 800px;
+    }
+    .box{
+        height: 260px;
+    }
+    .screen{
+        height: auto;
+    }
+
+    .button{
+        width: 50px;
+        height: 25px;
+        margin: 6px;
+        font-size: 16px;
+    }
+
+    .btn-white, .btn-yellow, .btn-green{
+        font-size: 9px;
+    }
+}
+
+@media (min-width: 1024px) and (max-width: 1300px){
+    .container{
+        margin-top: -100px !important;
+    }
+}
+
+@media (max-width: 550px){
+    body{
+        padding: 20px;
+        background-color: var(--bg-keyboard) !important;
+    }
+    .container{
+        margin-top: -200px;
+        width: 100%;
+        height: auto; 
+    }
+
+    .box{
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+        height: auto;
+    }
+
+    .screen{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 12px;
+    }
+
+    .screen, .keyboard{
+        width: 100%;
+        margin-bottom: 10px;
+        margin-left: 0;
+        border-radius: 8px;
+    }
+
+    .inputs .square{
+        width: 22px;
+        height: 30px;
+        font-size: 20px;
+    }
+    .button{
+        width: 30%;
+        font-size: 20px;
+    }
+
+    .btn-white, .btn-yellow, .btn-green{
+        font-size: 14px;
+    }
 }

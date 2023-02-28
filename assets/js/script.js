@@ -8,6 +8,7 @@ let datailsRight = document.querySelector('.details-1-right');
 let currentStage = 0;
 let number = '';
 let white = true;
+votos = [];
 
 const steps = getSteps();
 
@@ -54,10 +55,17 @@ const updateInterface = () => {
 
         let photosHtml = '';
         for (let i in candidate[0].photos) {
-            photosHtml +=
+            if(candidate[0].photos[i].small){
+                photosHtml +=
+                `<div class="details-img small">
+                <img src="assets/images/${candidate[0].photos[i].url}" alt=""/>
+                ${candidate[0].photos[i].legend}</div>`;
+            }else{
+                photosHtml +=
                 `<div class="details-img">
                 <img src="assets/images/${candidate[0].photos[i].url}" alt=""/>
                 ${candidate[0].photos[i].legend}</div>`;
+            }
         }
 
         datailsRight.innerHTML = photosHtml;
@@ -114,10 +122,17 @@ const handleGreenButtonClick = () => {
     if(white === true){
         console.log('Confirmando como voto BRANCO !');
         check = true;
+        votos.push({
+            etapa: steps[currentStage].title,
+            voto: 'branco'
+        });
     }
     else if(number.length === step.numbers){
-        console.log(`Confirmando como ${number}`);
         check = true;
+        votos.push({
+            etapa: steps[currentStage].title,
+            voto: number
+        });
     }
     if(check){
         currentStage++;
@@ -125,7 +140,8 @@ const handleGreenButtonClick = () => {
             startStep();
         }
         else{
-            console.log("FIM")
+            document.querySelector('.screen').innerHTML = '<div class="big blink">FIM</div>';
+            console.log(votos)
         }
     }
 }
